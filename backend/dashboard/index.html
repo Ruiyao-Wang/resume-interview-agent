@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>求职素材库</title>
+    <link rel="stylesheet" href="/dashboard/style.css" />
+  </head>
+  <body>
+    <main>
+      <header><h1>求职素材库</h1><p>多简历、多项目版本、按岗位自由组合。数据保存在本机。</p></header>
+      <nav class="material-nav"><a href="#personalSection">个人信息</a><a href="#educationSection">教育经历</a><a href="#projectSection">项目经历</a><a href="#resumeSection">简历文件</a><a href="/interview">简历分析与模拟面试</a></nav>
+      <form id="personalForm">
+        <section id="personalSection">
+          <h2>个人信息</h2>
+          <p>在这里统一保存；插件智能填写时读取最新资料。可选信息按需要填写。</p>
+          <div id="personalBasic" class="profile-grid"></div>
+          <details><summary>更多个人信息（性别、身高体重、证件等，选填）</summary><div id="personalSensitive" class="profile-grid"></div></details>
+          <details><summary>家庭成员信息（选填）</summary><p>这些资料只有页面询问，并在插件中单独确认后才填写。</p><div id="personalFamily" class="profile-grid"></div></details>
+        </section>
+        <section id="educationSection">
+          <h2>教育经历</h2><p>可以分别填写本科、硕士。设为默认的经历用于只有一组学校、学历的表单；完整多段教育表单可按页面情况手动核对。</p>
+          <div id="educationRecords"></div>
+          <button id="addEducation" type="button" disabled>添加教育经历</button>
+        </section>
+        <div class="profile-save"><button id="savePersonal" type="submit" disabled>保存个人信息与教育经历</button><span id="personalStatus" role="status">正在读取资料……</span></div>
+      </form>
+      <p><a href="/dashboard/demo.html" target="_blank" rel="noopener">打开试填演示页</a> · 在插件里读取岗位，再推荐、填写和上传。</p>
+      <div class="columns">
+        <section id="resumeSection">
+          <h2>上传简历版本</h2>
+          <form id="resumeForm">
+            <input name="name" placeholder="版本名称，如：通信系统版" required />
+            <input name="tags" placeholder="标签：通信, MATLAB, 卫星" />
+            <textarea name="description" placeholder="这个版本适合什么岗位"></textarea>
+            <input name="file" type="file" accept=".pdf,.docx,.txt,.md" required />
+            <button>保存简历版本</button>
+          </form>
+          <div id="resumeList"></div>
+          <form id="resumeEditForm" hidden>
+            <h3>编辑简历名称与标签</h3>
+            <input name="name" aria-label="简历版本名称" required maxlength="150" />
+            <input name="tags" aria-label="简历标签" />
+            <textarea name="description" aria-label="简历适用方向"></textarea>
+            <button type="submit">保存修改</button>
+            <button id="cancelResumeEdit" type="button">取消</button>
+          </form>
+        </section>
+        <section id="projectSection">
+          <h2>添加项目表述</h2>
+          <form id="projectForm">
+            <p id="projectEditHint">同一项目可保存多个方向的表述；相同名称与表述名会更新该版本。</p>
+            <input name="project_name" placeholder="项目名称" required />
+            <input name="variant_name" placeholder="表述名称，如：通信岗版" value="通用版" required />
+            <input name="start_date" placeholder="开始时间，如：2025-09" />
+            <input name="end_date" placeholder="结束时间，如：2025-11 或 至今" />
+            <input name="role" placeholder="本人角色，如：项目成员（如实填写）" />
+            <input name="organization" placeholder="学校或研究机构（选填）" />
+            <textarea name="responsibilities" placeholder="本人职责（网站有单独职责栏时使用）"></textarea>
+            <input name="project_tags" placeholder="项目标签：LoRaWAN, STM32, 数据分析" />
+            <input name="variant_tags" placeholder="本表述额外标签：项目协作, 报告" />
+            <textarea name="content" placeholder="项目要点，可写多条" required></textarea>
+            <button>保存/更新该表述</button>
+            <button id="newProject" type="button">清空，录入另一个项目</button>
+            <button id="copyProject" type="button" hidden>以此为基础另存一个版本</button>
+          </form>
+          <div id="projectList"></div>
+        </section>
+      </div>
+      <section>
+        <h2>岗位匹配测试</h2>
+        <form id="matchForm">
+          <input name="job_title" placeholder="岗位名称" />
+          <textarea name="job_description" placeholder="粘贴岗位职责和任职要求" required></textarea>
+          <button>推荐简历与项目组合</button>
+        </form>
+        <div id="matchResult"></div>
+      </section>
+      <div id="message"></div>
+    </main>
+    <script src="/shared/core.js"></script>
+    <script src="/dashboard/profile.js"></script>
+    <script src="/dashboard/app.js"></script>
+  </body>
+</html>

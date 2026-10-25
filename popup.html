@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>求职表单助手</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <h1>求职表单助手</h1>
+      <p class="hint">只填写当前页面，不会点击“提交”。绿色边框表示本次已填写。</p>
+      <button id="smartFill" class="primary">智能填写当前页面（含简历附件）</button>
+      <p class="hint">自动读岗位、选材料、填写。申请页没有岗位要求时，请先在岗位详情页点一次此按钮。</p>
+      <button id="openLibrary" class="secondary">打开素材库 / 上传简历</button>
+      <button id="extractJob" class="primary">① 读取当前岗位</button>
+      <details id="jobEditor">
+        <summary>岗位内容（可修改或直接粘贴）</summary>
+        <input id="jobTitle" placeholder="岗位名称" />
+        <textarea id="jobText" placeholder="岗位职责和任职要求"></textarea>
+      </details>
+      <button id="matchJob" class="primary">② 按岗位推荐简历和项目</button>
+      <section id="selection"></section>
+      <button id="fillProjects" class="primary" disabled>③ 将所选项目填入当前申请表</button>
+      <button id="scanUpload" class="secondary" disabled>④ 检查当前页的附件上传框</button>
+      <section id="uploadSection" hidden>
+        <select id="uploadTarget" aria-label="选择简历上传框"></select>
+        <button id="attachResume" class="primary">上传所选简历到这个框</button>
+        <p class="hint">上传你保存的原文件；混选项目不会改写PDF附件。</p>
+      </section>
+      <hr />
+      <button id="fillSafe" class="primary">填写普通字段</button>
+      <button id="fillSensitive" class="danger" hidden>确认填写敏感字段</button>
+      <button id="openOptions" class="secondary">个人信息与教育经历</button>
+      <button id="legacyOptions" class="secondary">导入旧插件中的个人资料</button>
+      <section id="result" aria-live="polite"></section>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

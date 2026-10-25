@@ -1,0 +1,17 @@
+:root { font-family: system-ui, "Microsoft YaHei", sans-serif; color: #24262a; background: #f4f6f8; }
+body { margin: 0; }
+main { max-width: 940px; margin: 0 auto; padding: 28px 20px 60px; }
+header { display: flex; justify-content: space-between; align-items: start; gap: 20px; }
+h1 { margin: 0 0 8px; }
+header p, section p { color: #666b73; }
+section { background: white; margin-top: 20px; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px #0000000b; }
+section.sensitive { border-left: 4px solid #d69b2d; }
+h2 { margin: 0 0 14px; font-size: 18px; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(240px, 1fr)); gap: 14px 18px; }
+label { display: grid; gap: 6px; font-size: 13px; font-weight: 650; }
+input { border: 1px solid #c9cdd3; border-radius: 7px; padding: 10px; font: inherit; font-weight: 400; }
+input:focus { outline: 2px solid #91adf0; border-color: #4169d8; }
+button { background: #2457d6; color: white; border: 0; border-radius: 8px; padding: 11px 24px; font-weight: 700; cursor: pointer; }
+#status { position: fixed; right: 22px; bottom: 22px; background: #1f6f3e; color: white; padding: 10px 16px; border-radius: 8px; opacity: 0; transition: opacity .2s; }
+#status.show { opacity: 1; }
+@media (max-width: 650px) { .grid { grid-template-columns: 1fr; } header { flex-direction: column; } }

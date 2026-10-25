@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "求职表单助手",
+  "version": "1.0.0",
+  "description": "在不同招聘网站识别并填写求职表单，敏感字段单独确认，永不自动提交。",
+  "permissions": ["storage", "activeTab", "tabs", "scripting"],
+  "background": {"service_worker": "background.js"},
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_title": "求职表单助手",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["core.js", "project-fields.js", "page-context.js", "preference-values.js", "education-records.js", "select-controls.js", "content.js", "project-content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

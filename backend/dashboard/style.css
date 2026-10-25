@@ -1,0 +1,28 @@
+:root { font-family: system-ui, "Microsoft YaHei", sans-serif; color: #202124; background: #f4f6f8; }
+body { margin: 0; }
+main { max-width: 1100px; margin: auto; padding: 30px 20px 60px; }
+header p { color: #666; }
+.columns { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+section { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 12px #0000000a; }
+form { display: grid; gap: 10px; }
+[hidden] { display: none !important; }
+.variant-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.variant-actions button, button[type="button"] { background: #edf2ff; color: #254d9a; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; }
+.material-nav { display: flex; gap: 20px; flex-wrap: wrap; margin: 20px 0; }
+.material-nav a { color: #2457d6; font-weight: 650; }
+.profile-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin: 14px 0; }
+.profile-grid label { display: flex; flex-direction: column; gap: 6px; }
+.profile-grid input { min-width: 0; }
+.profile-save { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+details { margin: 12px 0; }
+button:disabled { opacity: .5; cursor: default; }
+@media (max-width: 600px) { .profile-grid { grid-template-columns: 1fr; } }
+input, textarea { padding: 10px; border: 1px solid #c7ccd3; border-radius: 7px; font: inherit; }
+textarea { min-height: 86px; resize: vertical; }
+button { justify-self: start; border: 0; border-radius: 7px; background: #2457d6; color: white; padding: 10px 16px; font-weight: 700; cursor: pointer; }
+.card { margin-top: 12px; border: 1px solid #e0e3e8; border-radius: 8px; padding: 12px; }
+.tag { display: inline-block; background: #edf2ff; color: #2d55a6; padding: 2px 7px; border-radius: 12px; margin: 2px; font-size: 12px; }
+.score { color: #176b38; font-weight: 750; }
+#message { position: fixed; right: 20px; bottom: 20px; padding: 10px 14px; background: #1e6b3d; color: white; border-radius: 8px; display: none; }
+@media (max-width: 760px) { .columns { grid-template-columns: 1fr; } }

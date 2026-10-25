@@ -1,0 +1,8 @@
+{
+  "name": "job-form-autofill-extension",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {"test": "python scripts/check.py", "test:unit": "python scripts/check.py --unit", "test:e2e": "node tests/e2e.cjs && node tests/dropdowns.e2e.cjs && node tests/interview.e2e.cjs"},
+  "devDependencies": {"playwright": "1.62.1"}
+}

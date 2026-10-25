@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>简历分析与模拟面试 Agent</title>
+    <link rel="stylesheet" href="/dashboard/style.css" />
+    <link rel="stylesheet" href="/dashboard/interview.css" />
+  </head>
+  <body>
+    <main class="agent-main">
+      <header class="agent-header">
+        <div><p class="eyebrow">CAREER PRACTICE · 求职练习</p><h1>简历分析与模拟面试</h1><p>用真实经历对照岗位要求，逐题练习，把不熟悉的知识点留下来复习。</p></div>
+        <span id="modeBadge" class="mode-badge">读取配置中</span>
+      </header>
+      <nav class="material-nav" aria-label="应用导航"><a href="/">求职素材库与自动填写</a><a href="#setupPanel">开始练习</a><a href="#historyPanel">面试历史</a></nav>
+      <div id="modeNotice" class="notice" role="note"></div>
+      <section id="tokenPanel" hidden>
+        <h2>连接受保护的服务</h2>
+        <p>填写部署者提供的访问令牌（不是大模型 API Key）。令牌仅保存在本浏览器标签页会话中。</p>
+        <form id="tokenForm" class="inline-form"><label for="tokenInput">访问令牌</label><input id="tokenInput" type="password" autocomplete="off" maxlength="500" required /><button type="submit" data-lock>连接并刷新</button><button type="button" id="forgetToken" data-lock>清除令牌</button></form>
+      </section>
+      <div id="appError" class="error-box" role="alert" hidden></div>
+      <p id="loadingStatus" class="loading-status" role="status" aria-live="polite">正在连接服务……</p>
+      <div class="agent-layout">
+        <aside>
+          <section id="setupPanel">
+            <h2>1. 准备材料</h2>
+            <p class="muted">支持可提取文字的 PDF 和 DOCX。扫描图片简历需先做 OCR。本页数据与原素材库独立保存。</p>
+            <form id="uploadForm">
+              <label for="resumeFile">简历文件</label>
+              <input id="resumeFile" type="file" accept=".pdf,.docx" required data-lock />
+              <button id="uploadButton" type="submit" data-lock>上传并提取文字</button>
+            </form>
+            <p id="resumeStatus" class="muted" role="status">尚未上传简历</p>
+            <details id="resumePreview" hidden><summary>查看提取文本，检查是否完整</summary><pre id="resumeText"></pre></details>
+            <button id="demoButton" type="button" class="secondary" data-lock>使用脱敏示例，体验完整流程</button>
+            <hr />
+            <form id="createSessionForm">
+              <label for="sessionTitle">练习名称</label><input id="sessionTitle" maxlength="200" placeholder="例如：Python 开发岗位面试" data-lock />
+              <label for="jdInput">目标岗位 JD <span class="required">*</span></label><textarea id="jdInput" minlength="20" maxlength="30000" rows="7" placeholder="粘贴岗位职责与任职要求，至少 20 个字符" required data-lock></textarea>
+              <label for="questionCount">基础问题数量（追问另计）</label><select id="questionCount" data-lock><option value="3">3 题 · 快速体验</option><option value="5" selected>5 题 · 标准练习</option><option value="8">8 题 · 深入练习</option></select>
+              <label id="externalConsentLabel" class="checkbox-label" hidden><input id="externalConsent" type="checkbox" data-lock /><span>我同意将本次简历文本、JD 和后续回答发送至当前配置的模型服务。请先移除证件、联系方式等不必要的敏感信息。</span></label>
+              <button id="createButton" type="submit" data-lock>开始分析与面试</button>
+            </form>
+          </section>
+          <section id="historyPanel"><div class="section-heading"><h2>面试历史</h2><button id="refreshHistory" type="button" class="small-button" data-lock>刷新</button></div><div id="historyList"><p class="muted">正在读取历史……</p></div></section>
+        </aside>
+        <div class="workbench">
+          <section id="workflowPanel">
+            <div class="section-heading"><h2 id="sessionHeading">2. 分析与练习</h2><span id="sessionStatus" class="tag">未开始</span></div>
+            <p id="sessionMeta" class="muted">上传简历并填写 JD，或使用左侧脱敏示例开始。</p>
+            <ol id="stageList" class="stage-list" aria-label="Agent 工作流"></ol>
+            <details id="traceDetails" hidden><summary>查看节点执行记录</summary><ul id="eventList" class="trace-list"></ul></details>
+            <div class="button-row"><button id="prepareButton" type="button" data-lock hidden>继续解析材料</button><button id="retryButton" type="button" data-lock hidden>重试失败的步骤</button></div>
+            <p id="sessionError" class="error-text" role="alert" hidden></p>
+          </section>
+          <section id="analysisPanel" hidden><h2>岗位匹配分析</h2><div id="analysisContent"></div><details><summary>查看结构化简历与岗位要求</summary><div id="structuredContent"></div></details></section>
+          <section id="interviewPanel" hidden>
+            <div class="section-heading"><h2>模拟面试</h2><span id="answerProgress" class="tag"></span></div>
+            <p class="muted">按实际参与程度回答。不熟悉可以坦诚说明；系统不会替你编造工作经历。</p>
+            <div id="questionCard" class="question-card"><p id="questionMeta" class="eyebrow"></p><h3 id="currentQuestion"></h3><p id="questionEvidence" class="muted"></p></div>
+            <form id="answerForm"><label for="answerInput">你的回答</label><textarea id="answerInput" rows="7" maxlength="10000" required placeholder="可以按：背景与目标 → 本人负责的工作 → 方法与验证 → 结果及限制来回答。" data-lock></textarea><button id="answerButton" type="submit" data-lock>提交回答并评价</button></form>
+            <p id="noQuestion" class="notice" hidden>本轮问题已完成，可以生成最终报告。</p>
+            <div class="button-row"><button id="finishButton" type="button" data-lock>结束练习并生成报告</button></div>
+            <div id="turnList"></div>
+          </section>
+          <section id="reviewPanel" hidden><h2>薄弱点与错题复习</h2><p class="muted">复习不会覆盖原回答和原面试评分。重新作答后会保留独立的评价记录。</p><div id="weakPointList"></div><div id="reviewList"></div></section>
+          <section id="reportPanel" hidden><div class="section-heading"><h2>最终面试报告</h2><div class="button-row"><button id="exportReport" type="button" class="small-button" data-lock>导出 JSON</button><button id="printReport" type="button" class="small-button" data-lock>打印报告</button></div></div><div id="reportContent"></div></section>
+          <p class="footnote">评分用于辅助练习，不代表录用概率。真实性维度仅检查资料与回答的一致性，不能鉴定经历真伪。参考答案是组织思路的示范，只能使用你确实掌握、实际参与的内容。</p>
+        </div>
+      </div>
+    </main>
+    <script src="/dashboard/interview.js" defer></script>
+  </body>
+</html>

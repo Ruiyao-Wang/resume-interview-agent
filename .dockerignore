@@ -1,0 +1,17 @@
+.data
+.env
+.env.*
+!.env.example
+backend/.venv
+.venv
+**/__pycache__
+**/*.pyc
+node_modules
+dist
+test-results
+playwright-report
+*.pdf
+*.docx
+*.zip
+*.log
+.git

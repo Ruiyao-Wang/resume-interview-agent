@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><title>试填演示 · 求职助手</title><link rel="stylesheet" href="/dashboard/style.css"></head>
+<body><main>
+<h1>本地试填演示</h1>
+<p>本页仅在本机演示，附件不会发往招聘网站。先在素材库添加你自己的项目和简历，再使用插件。</p>
+<p><a href="/dashboard/select-demo.html">试填城市、学校与学历下拉框</a></p>
+<article><h2>模型评测工程师（演示岗位）</h2><p>岗位职责：使用 Python、PyTorch 完成计算机视觉模型评测、数据质量分析与误差定位。要求了解语义分割、IoU、MAE、数据划分与模型验证。</p></article>
+<section><h2>基本信息</h2><label>姓名<input aria-label="姓名"></label><label>电子邮箱<input aria-label="电子邮箱" type="email"></label></section>
+<section id="projects"><h2>项目经历</h2><div id="projectCards"></div><button id="addProject" type="button">添加项目</button></section>
+<section><h2>附件</h2><label>简历附件<input id="resumeUpload" type="file" accept=".pdf,.txt,.md"></label><p id="fileStatus">尚未选择文件</p><label>头像照片<input type="file" accept="image/*"></label></section>
+<p>没有投递按钮；填写完可直接关闭页面。</p>
+</main><script src="/dashboard/demo.js"></script></body>
+</html>

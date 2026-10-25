@@ -1,0 +1,14 @@
+const assert = require('node:assert/strict');
+const fields = require('../project-fields.js');
+assert.equal(fields.projectField('项目名称'), 'project_name');
+assert.equal(fields.projectField('本人职责'), 'responsibilities');
+assert.equal(fields.projectField('毕业时间'), null);
+assert.equal(fields.projectField('名称', '科研项目'), 'project_name');
+assert.equal(fields.projectField('名称', '公司信息'), null);
+assert.equal(fields.projectField('简介', '研究经历'), 'content');
+assert.equal(fields.projectField('Your contribution', 'Projects'), 'responsibilities');
+assert.equal(fields.dateValue('2026-7', 'month'), '2026-07');
+assert.equal(fields.dateValue('2026-07', 'date'), '');
+assert.equal(fields.dateValue('至今', 'date'), '');
+assert.equal(fields.dateValue('2026-07-12', 'date'), '2026-07-12');
+console.log('project field tests passed');

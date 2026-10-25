@@ -1,0 +1,22 @@
+services:
+  interview:
+    build: .
+    ports:
+      - "127.0.0.1:8765:8765"
+    env_file: .env
+    environment:
+      APP_ACCESS_TOKEN: ${APP_ACCESS_TOKEN:?Set a random access token of at least 24 characters in .env}
+      JOB_AUTOFILL_DATA_DIR: /data
+    volumes:
+      - interview-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 512m
+    cpus: 1.0
+    restart: unless-stopped
+
+volumes:
+  interview-data:
